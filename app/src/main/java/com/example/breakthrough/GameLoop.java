@@ -73,11 +73,6 @@ public class GameLoop extends Thread{
             }
 
 
-
-
-
-
-
             elapsedTime = System.currentTimeMillis() - startTime;
             sleepTime = (long) (updateCount*UPS_PERIOD - elapsedTime);
                     if(sleepTime > 0){
@@ -87,7 +82,7 @@ public class GameLoop extends Thread{
                             e.printStackTrace();
                         }
                     }
-            while (sleepTime < 0&& updateCount < MAX_UPS-1){
+            while (sleepTime < 0 && updateCount < MAX_UPS-1){
                 game.update();
                 updateCount++;
 
