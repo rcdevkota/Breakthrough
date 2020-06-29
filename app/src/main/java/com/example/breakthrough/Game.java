@@ -9,8 +9,11 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import androidx.core.content.ContextCompat;
 
+import java.util.jar.JarOutputStream;
+
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
+    private final Joystick joystick;
     private GameLoop gameLoop;
 
     public Game(Context context) {
@@ -20,6 +23,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         surfaceHolder.addCallback(this);
 
         gameLoop = new GameLoop(this, surfaceHolder);
+        joystick = new Joystick(150,400, 70,40);
         player =new Player(getContext(), 500,500,30);
         setFocusable(true);
     }
@@ -28,10 +32,18 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                player.setPosition((float)event.getX(), (float)event.getY());
+                if(joystick.isPressed((float)event.getX(), (float)event.getY())){
+                    joystick.setIsPressed(true);
+                }
                 return true;
             case MotionEvent.ACTION_MOVE:
-                player.setPosition((float)event.getX(), (float)event.getY());
+                if(joystick.getIsPressed()){
+                    joystick.setActuator((float)event.getX(), (float)event.getY());
+                }
+                return true;
+            case MotionEvent.ACTION_UP:
+                joystick.setIsPressed(false);
+                joystick.resetActuator();
                 return true;
         }
         return super.onTouchEvent(event);
@@ -55,6 +67,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
         drowUPS(canvas);
         drowFPS(canvas);
+        joystick.drow(canvas);
         player.draw(canvas);
     }
 
@@ -79,7 +92,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-
-        player.update();
+        joystick.update();
+        player.update(joystick);
     }
 }
