@@ -1,10 +1,13 @@
-package com.example.breakthrough;
+package com.example.breakthrough.object;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import androidx.core.content.ContextCompat;
+
+import com.example.breakthrough.Joystick;
+import com.example.breakthrough.R;
 
 public class Player extends Character{
     private static final double MAX_SPEED = 10;

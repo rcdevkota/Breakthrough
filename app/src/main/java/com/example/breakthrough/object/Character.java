@@ -1,4 +1,4 @@
-package com.example.breakthrough;
+package com.example.breakthrough.object;
 
 import android.graphics.Canvas;
 

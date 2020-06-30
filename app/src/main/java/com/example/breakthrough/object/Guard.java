@@ -1,11 +1,9 @@
-package com.example.breakthrough;
+package com.example.breakthrough.object;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-
-import androidx.core.content.ContextCompat;
 
 public class Guard extends Character{
 

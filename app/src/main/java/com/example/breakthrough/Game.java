@@ -3,13 +3,13 @@ package com.example.breakthrough;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.media.Image;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import androidx.core.content.ContextCompat;
 
-import java.util.jar.JarOutputStream;
+import com.example.breakthrough.object.Guard;
+import com.example.breakthrough.object.Player;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
@@ -28,11 +28,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         joystick = new Joystick(150,400, 70,40);
         player =new Player(getContext(), joystick,500,500,30);
 
-        movePattern = new float[2][2];
+        movePattern = new float[3][2];
         movePattern[0][0]= 10;
         movePattern[0][1]= 10;
-        movePattern[1][0]= 100;
-        movePattern[1][1]= 100;
+        movePattern[1][0]= 0;
+        movePattern[1][1]= 500;
+        movePattern[2][0]= 300;
+        movePattern[2][1]= 500;
 
         guards = new Guard[2];
         guards[0] =new Guard(getContext(),0,30 ,movePattern);
@@ -41,7 +43,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         movePattern[0][0]= 200;
         movePattern[0][1]= 90;
         movePattern[1][0]= 330;
-        movePattern[1][1]= 300;
+        movePattern[1][1]= 0;
         guards[1] =new Guard(getContext(),0,30 ,movePattern);
 
         setFocusable(true);
