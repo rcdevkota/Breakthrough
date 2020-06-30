@@ -6,16 +6,17 @@ import android.graphics.Paint;
 
 import androidx.core.content.ContextCompat;
 
-public class Player {
+public class Player extends Character{
     private static final double MAX_SPEED = 10;
-    private float posX;
-    private float posY;
+    private final Joystick joystick;
+
     private float radius;
     private Paint paint;
-    private double velocityX;
-    private double velocityY;
 
-    public Player(Context context, float posX, float posY, float radius){
+
+    public Player(Context context,Joystick joystick, float posX, float posY, float radius){
+        super(posX,posY);
+        this.joystick = joystick;
         this.posX = posX;
         this.posX = posY;
         this.radius = radius;
@@ -29,7 +30,12 @@ public class Player {
         canvas.drawCircle(posX, posY, radius, paint);
     }
 
-    public void update(Joystick joystick) {
+    @Override
+    public void setPosition() {
+
+    }
+
+    public void update() {
         velocityX = joystick.getActuatorX()*MAX_SPEED;
         velocityY = joystick.getActuatorY()*MAX_SPEED;
         posX += velocityX;

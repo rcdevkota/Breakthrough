@@ -15,6 +15,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
     private final Joystick joystick;
     private GameLoop gameLoop;
+    private float [][] movePattern;
+    private Guard[] guards;
 
     public Game(Context context) {
         super(context);
@@ -24,7 +26,24 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         gameLoop = new GameLoop(this, surfaceHolder);
         joystick = new Joystick(150,400, 70,40);
-        player =new Player(getContext(), 500,500,30);
+        player =new Player(getContext(), joystick,500,500,30);
+
+        movePattern = new float[2][2];
+        movePattern[0][0]= 10;
+        movePattern[0][1]= 10;
+        movePattern[1][0]= 100;
+        movePattern[1][1]= 100;
+
+        guards = new Guard[2];
+        guards[0] =new Guard(getContext(),0,30 ,movePattern);
+
+        movePattern = new float[2][2];
+        movePattern[0][0]= 200;
+        movePattern[0][1]= 90;
+        movePattern[1][0]= 330;
+        movePattern[1][1]= 300;
+        guards[1] =new Guard(getContext(),0,30 ,movePattern);
+
         setFocusable(true);
     }
 
@@ -69,6 +88,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         drowFPS(canvas);
         joystick.drow(canvas);
         player.draw(canvas);
+        for(int i = 0; i <guards.length; i++){
+            guards[i].draw(canvas);
+        }
     }
 
     public void drowUPS(Canvas canvas){
@@ -93,6 +115,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update() {
         joystick.update();
-        player.update(joystick);
+        player.update();
+        for(int i = 0; i <guards.length; i++) {
+            guards[i].update();
+        }
     }
 }
