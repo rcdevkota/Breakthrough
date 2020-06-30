@@ -25,7 +25,8 @@ public class Guard extends Character{
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawCircle(posX, posY, radius, paint);
+        float scale =canvas.getHeight()/1080;
+        canvas.drawCircle(posX *canvas.getHeight()/1080, posY*canvas.getHeight()/1080, radius*canvas.getHeight()/1080, paint);
     }
 
     @Override
@@ -34,7 +35,6 @@ public class Guard extends Character{
     }
 
     public void update() {
-
 
             double laenge =  Math.sqrt(Math.pow(movePattern[i%movePattern.length][0] - posX, 2) + Math.pow(movePattern[i%movePattern.length][1] - posY, 2));
             if(!(laenge<MAX_SPEED) ) {

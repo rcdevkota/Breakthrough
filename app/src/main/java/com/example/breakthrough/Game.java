@@ -98,20 +98,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        drowUPS(canvas);
-        drowFPS(canvas);
+       // drowUPS(canvas);
+       // drowFPS(canvas);
         joystick.drow(canvas);
         player.draw(canvas);
         for(int i = 0; i <guards.length; i++){
             guards[i].draw(canvas);
         }
     }
-
-
-
-
-
-
 
 
 

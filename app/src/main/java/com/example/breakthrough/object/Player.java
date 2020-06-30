@@ -30,7 +30,8 @@ public class Player extends Character{
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawCircle(posX, posY, radius, paint);
+
+        canvas.drawCircle(posX*canvas.getHeight()/1080, posY*canvas.getHeight()/1080, radius*canvas.getHeight()/1080, paint);
     }
 
     @Override
