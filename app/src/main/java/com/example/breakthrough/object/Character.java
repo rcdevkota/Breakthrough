@@ -10,7 +10,7 @@ public abstract class Character {
     protected double velocityX;
     protected double velocityY;
 
-    public Character (float posX, float posY){
+    public Character(float posX, float posY){
 
         this.posX =posX;
         this.posY =posY;

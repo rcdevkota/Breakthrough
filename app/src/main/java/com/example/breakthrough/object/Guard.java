@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-public class Guard extends Character{
+public class Guard extends Character {
 
     private static final double MAX_SPEED = 2;
     private float orientation;
@@ -25,7 +25,6 @@ public class Guard extends Character{
 
     @Override
     public void draw(Canvas canvas) {
-        float scale =canvas.getHeight()/1080;
         canvas.drawCircle(posX *canvas.getHeight()/1080, posY*canvas.getHeight()/1080, radius*canvas.getHeight()/1080, paint);
     }
 

@@ -10,6 +10,7 @@ import android.view.SurfaceView;
 import androidx.core.content.ContextCompat;
 
 import com.example.breakthrough.object.Guard;
+import com.example.breakthrough.object.Obstacles;
 import com.example.breakthrough.object.Player;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
@@ -18,6 +19,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
     private float [][] movePattern;
     private Guard[] guards;
+    private Obstacles[] obstacles;
+
 
     public Game(Context context) {
         super(context);
@@ -27,13 +30,28 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         gameLoop = new GameLoop(this, surfaceHolder);
         joystick = new Joystick(150,400, 70,40);
-        player =new Player(getContext(), joystick,500,500,30);
 
+
+
+        //mapp configurantin
+
+        float map[][] = new float[2][];
+        map[0]=new float[] {100,100,500,500};
+        map[1]=new float[] {100,1000,1000,100};
+
+        obstacles = new Obstacles[1];
+
+        obstacles[0] =new Obstacles(map);
+
+        player =new Player(obstacles ,getContext(), joystick,550,550,30);
+        //Guard configurantin
         movePattern = new float[3][2];
         movePattern[0][0]= 10;
         movePattern[0][1]= 10;
+
         movePattern[1][0]= 0;
         movePattern[1][1]= 500;
+
         movePattern[2][0]= 300;
         movePattern[2][1]= 500;
 
@@ -43,6 +61,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         movePattern = new float[2][2];
         movePattern[0][0]= 200;
         movePattern[0][1]= 90;
+
         movePattern[1][0]= 330;
         movePattern[1][1]= 0;
         guards[1] =new Guard(getContext(),0,30 ,movePattern);
@@ -105,6 +124,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         for(int i = 0; i <guards.length; i++){
             guards[i].draw(canvas);
         }
+        for(int i = 0; i <obstacles.length; i++){
+            obstacles[i].draw(canvas);
+        }
+
     }
 
 

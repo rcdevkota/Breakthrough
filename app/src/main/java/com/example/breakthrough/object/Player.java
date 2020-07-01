@@ -9,16 +9,17 @@ import androidx.core.content.ContextCompat;
 import com.example.breakthrough.Joystick;
 import com.example.breakthrough.R;
 
-public class Player extends Character{
-    private static final double MAX_SPEED = 10;
+public class Player extends Character {
+    private static final double MAX_SPEED = 20;
     private final Joystick joystick;
 
     private float radius;
     private Paint paint;
+    private Obstacles[] obstacles;
 
-
-    public Player(Context context,Joystick joystick, float posX, float posY, float radius){
+    public Player(Obstacles[] obstacles,Context context,Joystick joystick, float posX, float posY, float radius){
         super(posX,posY);
+        this.obstacles = obstacles;
         this.joystick = joystick;
         this.posX = posX;
         this.posX = posY;
@@ -42,12 +43,20 @@ public class Player extends Character{
     public void update() {
         velocityX = joystick.getActuatorX()*MAX_SPEED;
         velocityY = joystick.getActuatorY()*MAX_SPEED;
-        posX += velocityX;
-        posY += velocityY;
+        boolean[] col =obstacles[0].wallCollision(posX, posY, velocityX, velocityY,radius);
+        if(!col[0]){
+            posY += velocityY;
+        }
+        if(!col[1]){
+            posX += velocityX;
+        }
+
     }
 
     public void setPosition(float posX, float posY) {
         this.posX = posX;
         this.posY = posY;
     }
+
+
 }
