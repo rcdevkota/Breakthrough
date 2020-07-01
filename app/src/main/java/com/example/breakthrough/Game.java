@@ -29,7 +29,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         surfaceHolder.addCallback(this);
 
         gameLoop = new GameLoop(this, surfaceHolder);
-        joystick = new Joystick(150,400, 70,40);
+        joystick = new Joystick(1900,1080-(200+50), 150,40, super.getHeight());
 
 
 
@@ -42,8 +42,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         obstacles = new Obstacles[1];
 
         obstacles[0] =new Obstacles(map);
-
-        player =new Player(obstacles ,getContext(), joystick,550,550,30);
+        System.out.println(obstacles[0]);
+        player =new Player(obstacles ,getContext(), joystick,510,510,30);
         //Guard configurantin
         movePattern = new float[3][2];
         movePattern[0][0]= 10;

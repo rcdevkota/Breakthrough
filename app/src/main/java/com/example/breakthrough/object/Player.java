@@ -43,13 +43,12 @@ public class Player extends Character {
     public void update() {
         velocityX = joystick.getActuatorX()*MAX_SPEED;
         velocityY = joystick.getActuatorY()*MAX_SPEED;
-        boolean[] col =obstacles[0].wallCollision(posX, posY, velocityX, velocityY,radius);
-        if(!col[0]){
-            posY += velocityY;
-        }
-        if(!col[1]){
-            posX += velocityX;
-        }
+        double[] col =obstacles[0].wallCollision(posX, posY, velocityX, velocityY,radius);
+
+            posY += col[1];
+
+            posX += col[0];
+
 
     }
 

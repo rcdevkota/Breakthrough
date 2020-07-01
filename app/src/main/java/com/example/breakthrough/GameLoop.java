@@ -13,6 +13,7 @@ public class GameLoop extends Thread{
     private double averegeFPS;
 
 
+
     public GameLoop(Game game, SurfaceHolder surfaceHolder) {
         this.game = game;
         this.surfaceHolder = surfaceHolder;
