@@ -13,6 +13,13 @@ import com.example.breakthrough.object.Guard;
 import com.example.breakthrough.object.Obstacles;
 import com.example.breakthrough.object.Player;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
     private final Joystick joystick;
@@ -22,7 +29,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private Obstacles[] obstacles;
 
 
-    public Game(Context context) {
+    public Game(Context context , int level) {
         super(context);
 
         SurfaceHolder surfaceHolder = getHolder();
@@ -43,8 +50,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         obstacles[0] =new Obstacles(map);
         System.out.println(obstacles[0]);
-        player =new Player(obstacles ,getContext(), joystick,510,510,30);
+        player =new Player(obstacles ,getContext(), joystick,550,550,30);
         //Guard configurantin
+        ladeDatei(0);
+
         movePattern = new float[3][2];
         movePattern[0][0]= 10;
         movePattern[0][1]= 10;
@@ -67,6 +76,30 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         guards[1] =new Guard(getContext(),0,30 ,movePattern);
 
         setFocusable(true);
+    }
+
+    private void ladeDatei(int level) {
+        String datName = "level"+level+".txt";
+        File file = new File(datName);
+
+
+        try{
+
+            File temp = File.createTempFile("i-am-a-temp-file", ".txt" );
+
+            String absolutePath = temp.getAbsolutePath();
+            System.out.println("File path : " + absolutePath);
+
+            String filePath = absolutePath.
+                    substring(0,absolutePath.lastIndexOf(File.separator));
+            System.out.println();
+            System.out.println("File path : " + filePath);
+
+        }catch(IOException e){
+
+            e.printStackTrace();
+
+        }
     }
 
     @Override
