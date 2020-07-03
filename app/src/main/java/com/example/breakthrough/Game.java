@@ -28,7 +28,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
     private final Joystick joystick;
     private GameLoop gameLoop;
-    private float [][] movePattern;
+    private Point [] movePattern;
     private Guard[] guards;
     private Obstacles[] obstacles;
 
@@ -40,45 +40,40 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         surfaceHolder.addCallback(this);
 
         gameLoop = new GameLoop(this, surfaceHolder);
-        joystick = new Joystick(1900,1080-(200+50), 150,40, super.getHeight());
+
+
+        joystick = new Joystick(new Point(1900,1080-(250)), 150,40, super.getHeight());
 
 
 
-        //mapp configurantin
+        //map
 
-        float map[][] = new float[2][];
-        map[0]=new float[] {100,100,500,500};
-        map[1]=new float[] {100,1000,1000,100};
-
+        Point map[];
+        map = new Point[] {
+                new Point(100,100),
+                new Point(100,1000),
+                new Point(500,1000),
+                new Point(500,100)
+        };
         obstacles = new Obstacles[1];
-
         obstacles[0] =new Obstacles(map);
-        System.out.println(obstacles[0]);
-        player =new Player(obstacles ,getContext(), joystick,550,550,30);
+
+
+        player =new Player(obstacles ,getContext(), joystick,new Point(550,550),30);
         //Guard configurantin
         ladeDatei(context,0);
-        Point point = new Point();
-        point.x = 10;
 
-        movePattern = new float[3][2];
-        movePattern[0][0]= 10;
-        movePattern[0][1]= 10;
-
-        movePattern[1][0]= 0;
-        movePattern[1][1]= 500;
-
-        movePattern[2][0]= 300;
-        movePattern[2][1]= 500;
+        movePattern = new Point[3];
+        movePattern[0]= new Point(10,10);
+        movePattern[1] = new Point(0,500);
+        movePattern[2]= new Point(300,500);
 
         guards = new Guard[2];
         guards[0] =new Guard(getContext(),0,30 ,movePattern);
 
-        movePattern = new float[2][2];
-        movePattern[0][0]= 200;
-        movePattern[0][1]= 90;
-
-        movePattern[1][0]= 330;
-        movePattern[1][1]= 0;
+        movePattern = new Point[2];
+        movePattern[0]= new Point(200,90);
+        movePattern[1]= new Point(330,0);
         guards[1] =new Guard(getContext(),0,30 ,movePattern);
 
         setFocusable(true);
@@ -112,8 +107,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
     }
-
-
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -175,9 +168,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         }
 
     }
-
-
-
 
     public void drowUPS(Canvas canvas){
         String averagUPS = Double.toString(gameLoop.getAveregeUPS());

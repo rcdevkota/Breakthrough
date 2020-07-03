@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.io.InputStream;
+
 public class MainActivity extends AppCompatActivity {
 
     private Game game;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
+
         game.pause();
         super.onPause();
     }

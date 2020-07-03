@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 
 public class Guard extends Character {
 
@@ -11,11 +12,11 @@ public class Guard extends Character {
     private float orientation;
     private float radius;
     private Paint paint;
-    private float[][] movePattern;
+    private Point[] movePattern;
     private int i=0;
 
-    public Guard(Context context, float orientation,float radius, float[][] movePattern) {
-        super(movePattern[0][0], movePattern[0][1]);
+    public Guard(Context context, float orientation,float radius, Point[] movePattern) {
+        super(movePattern[0]);
         this.orientation = orientation;
         this.radius = radius;
         this.movePattern = movePattern;
@@ -25,7 +26,7 @@ public class Guard extends Character {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawCircle(posX *canvas.getHeight()/1080, posY*canvas.getHeight()/1080, radius*canvas.getHeight()/1080, paint);
+        canvas.drawCircle(pos.x *canvas.getHeight()/1080, pos.y*canvas.getHeight()/1080, radius*canvas.getHeight()/1080, paint);
     }
 
     @Override
@@ -35,15 +36,13 @@ public class Guard extends Character {
 
     public void update() {
 
-            double laenge =  Math.sqrt(Math.pow(movePattern[i%movePattern.length][0] - posX, 2) + Math.pow(movePattern[i%movePattern.length][1] - posY, 2));
-            if(!(laenge<MAX_SPEED) ) {
-                posX += (float) (MAX_SPEED * (movePattern[i%movePattern.length][0] - posX) / laenge);
-                posY += (float) (MAX_SPEED * (movePattern[i%movePattern.length][1] - posY) / laenge );
-            } else {
-                i++;
-            }
+        double laenge =  Math.sqrt(Math.pow(movePattern[i%movePattern.length].x - pos.x, 2) + Math.pow(movePattern[i%movePattern.length].y - pos.y, 2));
 
-
-
+        if(laenge<MAX_SPEED) {
+            i++;
+        } else {
+            pos.x += Math.round((MAX_SPEED * (movePattern[i%movePattern.length].x - pos.x)) / laenge);
+            pos.y += Math.round((MAX_SPEED * (movePattern[i%movePattern.length].y - pos.y)) / laenge);
+        }
     }
 }
