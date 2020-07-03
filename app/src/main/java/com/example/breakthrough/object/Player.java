@@ -50,7 +50,7 @@ public class Player extends Character {
     }
 
     public void setPosition(Point pos) {
-        this.pos = new Point (pos.x,pos.y);
+        this.pos = new Point (pos);
     }
 
 }

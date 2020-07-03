@@ -48,7 +48,7 @@ public class Obstacles {
 
 
 
-            if((map[i].y==map[(i + 1) % map.length].y)) {
+            if(map[i].y==map[(i + 1) % map.length].y) {
                 double distanceNew = Math.abs(map[i].y - (posY + moveY))-radius;
                 if((distanceNew<0) && ((map[(i + 1) % map.length].x < posX + moveX) == (map[i].x > posX + moveX))){
 

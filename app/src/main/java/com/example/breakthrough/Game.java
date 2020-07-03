@@ -44,24 +44,24 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         joystick = new Joystick(new Point(1900,1080-(250)), 150,40, super.getHeight());
 
+        Point[][][] data = ladeDatei(context,0);
 
 
-        //map
-
-        Point map[];
-        map = new Point[] {
-                new Point(100,100),
-                new Point(100,1000),
-                new Point(500,1000),
-                new Point(500,100)
-        };
-        obstacles = new Obstacles[1];
-        obstacles[0] =new Obstacles(map);
+        System.out.println(data[1][0][0]);
 
 
-        player =new Player(obstacles ,getContext(), joystick,new Point(550,550),30);
+        obstacles = new Obstacles[data[1].length];
+
+        for(int i=0; i < data[1].length;i++){
+            obstacles[i] = new Obstacles (data[1][i]);
+        }
+
+        player =new Player(obstacles ,getContext(), joystick,data[0][0][0],30);
+
         //Guard configurantin
-        ladeDatei(context,0);
+
+
+
 
         movePattern = new Point[3];
         movePattern[0]= new Point(10,10);
@@ -79,8 +79,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         setFocusable(true);
     }
 
-    private void ladeDatei(Context context ,int level) {
-
+    private Point[][][] ladeDatei(Context context ,int level) {
+        Point[][][] data =new Point[4][][];
         String datName = "level"+level+".txt";
         String string = "";
         BufferedReader reader = null;
@@ -91,9 +91,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
             // do reading, usually loop until end of file reading
             String mLine;
+            int i = 0;
             while ((mLine = reader.readLine()) != null) {
+
                 //process line
-                System.out.println(mLine);
+                data[i]=getData(mLine);
+                //System.out.println(getData(mLine)[0][0]);
+
+                i++;
             }
         } catch (IOException e) {
             //log the exception
@@ -106,7 +111,36 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 }
             }
         }
+        return data;
     }
+
+    private Point[][] getData(String text){
+        System.out.println(text);
+        Point[][] data = null;
+        String gruppe[] = text.split(":");
+
+
+
+        data = new Point[gruppe.length][];
+        for(int i = 0 ;i < gruppe.length; i++) {
+            String elemente[] = gruppe[i].split(";");
+            System.out.println(data.length);
+            data[i] = new Point[elemente.length];
+            System.out.println(data.length);
+            for(int j = 0 ;j < elemente.length; j++) {
+
+                System.out.println(gruppe.length + "+"+data.length);
+
+                String [] einzel = elemente[j].split(",");
+                data[i][j] = new Point(Integer.parseInt(einzel[0]), Integer.parseInt(einzel[1]));
+
+            }
+        }
+        System.out.println(data[0][0]);
+        return data;
+    }
+
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
