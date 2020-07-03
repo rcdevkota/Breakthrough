@@ -3,6 +3,7 @@ package com.example.breakthrough;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -18,6 +19,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.channels.AsynchronousServerSocketChannel;
 import java.util.Scanner;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
@@ -52,7 +56,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         System.out.println(obstacles[0]);
         player =new Player(obstacles ,getContext(), joystick,550,550,30);
         //Guard configurantin
-        ladeDatei(0);
+        ladeDatei(context,0);
+        Point point = new Point();
+        point.x = 10;
 
         movePattern = new float[3][2];
         movePattern[0][0]= 10;
@@ -78,29 +84,36 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         setFocusable(true);
     }
 
-    private void ladeDatei(int level) {
+    private void ladeDatei(Context context ,int level) {
+
         String datName = "level"+level+".txt";
-        File file = new File(datName);
+        String string = "";
+        BufferedReader reader = null;
+        try {
 
+            reader = new BufferedReader(
+                    new InputStreamReader(context.getAssets().open(datName), "UTF-8"));
 
-        try{
-
-            File temp = File.createTempFile("i-am-a-temp-file", ".txt" );
-
-            String absolutePath = temp.getAbsolutePath();
-            System.out.println("File path : " + absolutePath);
-
-            String filePath = absolutePath.
-                    substring(0,absolutePath.lastIndexOf(File.separator));
-            System.out.println();
-            System.out.println("File path : " + filePath);
-
-        }catch(IOException e){
-
-            e.printStackTrace();
-
+            // do reading, usually loop until end of file reading
+            String mLine;
+            while ((mLine = reader.readLine()) != null) {
+                //process line
+                System.out.println(mLine);
+            }
+        } catch (IOException e) {
+            //log the exception
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    //log the exception
+                }
+            }
         }
     }
+
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
