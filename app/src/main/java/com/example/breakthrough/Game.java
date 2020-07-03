@@ -41,17 +41,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         gameLoop = new GameLoop(this, surfaceHolder);
 
-
         joystick = new Joystick(new Point(1900,1080-(250)), 150,40, super.getHeight());
 
         Point[][][] data = ladeDatei(context,0);
 
-
-        System.out.println(data[1][0][0]);
-
-
         obstacles = new Obstacles[data[1].length];
-
         for(int i=0; i < data[1].length;i++){
             obstacles[i] = new Obstacles (data[1][i]);
         }
@@ -61,21 +55,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         //Guard configurantin
 
 
-
-
-        movePattern = new Point[3];
-        movePattern[0]= new Point(10,10);
-        movePattern[1] = new Point(0,500);
-        movePattern[2]= new Point(300,500);
-
-        guards = new Guard[2];
-        guards[0] =new Guard(getContext(),0,30 ,movePattern);
-
-        movePattern = new Point[2];
-        movePattern[0]= new Point(200,90);
-        movePattern[1]= new Point(330,0);
-        guards[1] =new Guard(getContext(),0,30 ,movePattern);
-
+        guards = new Guard[data[3].length];
+        for(int i=0; i < data[3].length;i++){
+            guards[i] =new Guard(getContext(),0,25 ,data[3][i]);
+        }
         setFocusable(true);
     }
 
@@ -85,19 +68,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         String string = "";
         BufferedReader reader = null;
         try {
-
             reader = new BufferedReader(
                     new InputStreamReader(context.getAssets().open(datName), "UTF-8"));
-
             // do reading, usually loop until end of file reading
             String mLine;
             int i = 0;
             while ((mLine = reader.readLine()) != null) {
-
                 //process line
                 data[i]=getData(mLine);
-                //System.out.println(getData(mLine)[0][0]);
-
                 i++;
             }
         } catch (IOException e) {
@@ -115,32 +93,27 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private Point[][] getData(String text){
-        System.out.println(text);
+       // System.out.println(text);
         Point[][] data = null;
         String gruppe[] = text.split(":");
-
-
 
         data = new Point[gruppe.length][];
         for(int i = 0 ;i < gruppe.length; i++) {
             String elemente[] = gruppe[i].split(";");
-            System.out.println(data.length);
+
             data[i] = new Point[elemente.length];
-            System.out.println(data.length);
+
             for(int j = 0 ;j < elemente.length; j++) {
 
-                System.out.println(gruppe.length + "+"+data.length);
+
 
                 String [] einzel = elemente[j].split(",");
                 data[i][j] = new Point(Integer.parseInt(einzel[0]), Integer.parseInt(einzel[1]));
 
             }
         }
-        System.out.println(data[0][0]);
         return data;
     }
-
-
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
