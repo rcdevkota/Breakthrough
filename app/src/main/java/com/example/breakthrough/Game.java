@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import com.example.breakthrough.object.Guard;
 import com.example.breakthrough.object.Obstacles;
 import com.example.breakthrough.object.Player;
+import com.example.breakthrough.object.Target;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,6 +32,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private Point [] movePattern;
     private Guard[] guards;
     private Obstacles[] obstacles;
+    private Target target;
 
 
     public Game(Context context , int level) {
@@ -41,24 +43,29 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         gameLoop = new GameLoop(this, surfaceHolder);
 
-        joystick = new Joystick(new Point(1900,1080-(250)), 150,40, super.getHeight());
+        joystick = new Joystick(new Point(1900,1080-(650)), 150,40, super.getHeight());
 
         Point[][][] data = ladeDatei(context,0);
 
         obstacles = new Obstacles[data[1].length];
-        for(int i=0; i < data[1].length;i++){
+        for(int i=0; i < data[1].length;i++) {
             obstacles[i] = new Obstacles (data[1][i]);
         }
 
-        player =new Player(obstacles ,getContext(), joystick,data[0][0][0],30);
+        target = new Target(data[2][0]);
+
+        player =new Player(obstacles ,getContext(), joystick,data[0][0][0],30, target);
 
         //Guard configurantin
-
 
         guards = new Guard[data[3].length];
         for(int i=0; i < data[3].length;i++){
             guards[i] =new Guard(getContext(),0,25 ,data[3][i]);
         }
+
+
+
+
         setFocusable(true);
     }
 
@@ -163,16 +170,19 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-       // drowUPS(canvas);
-       // drowFPS(canvas);
+        drowUPS(canvas);
+        drowFPS(canvas);
         joystick.drow(canvas);
         player.draw(canvas);
         for(int i = 0; i <guards.length; i++){
             guards[i].draw(canvas);
         }
+
         for(int i = 0; i <obstacles.length; i++){
             obstacles[i].draw(canvas);
         }
+
+        target.draw(canvas);
 
     }
 

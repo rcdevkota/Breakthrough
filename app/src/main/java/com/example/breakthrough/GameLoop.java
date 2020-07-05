@@ -48,6 +48,8 @@ public class GameLoop extends Thread{
         startTime = System.currentTimeMillis();
 
 
+
+
         while (isRunging){
 
 

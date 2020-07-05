@@ -45,4 +45,6 @@ public class Guard extends Character {
             pos.y += Math.round((MAX_SPEED * (movePattern[i%movePattern.length].y - pos.y)) / laenge);
         }
     }
+
+
 }
