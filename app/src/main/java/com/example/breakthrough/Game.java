@@ -42,7 +42,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         gameLoop = new GameLoop(this, surfaceHolder);
 
-        joystick = new Joystick(new Point(1900,1080-(650)), 150,40, super.getHeight());
+        joystick = new Joystick(new Point(1700,1080-(650)), 150,40, super.getHeight());
 
         Point[][][] data = ladeDatei(context,0);
 
