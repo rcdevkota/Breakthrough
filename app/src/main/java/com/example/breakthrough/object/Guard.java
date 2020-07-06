@@ -14,14 +14,19 @@ public class Guard extends Character {
     private Paint paint;
     private Point[] movePattern;
     private int i=0;
+    private Obstacles map[];
+    private Point[] fieldOfView;
 
-    public Guard(Context context, float orientation,float radius, Point[] movePattern) {
+    public Guard(Context context, float orientation,float radius, Point[] movePattern, Obstacles[] map) {
         super(movePattern[0]);
+        this.map = map;
         this.orientation = orientation;
         this.radius = radius;
         this.movePattern = movePattern;
         paint = new Paint();
         paint.setColor(Color.RED);
+
+        fieldOfView = new Point[1];
     }
 
     @Override
@@ -45,6 +50,9 @@ public class Guard extends Character {
             pos.y += Math.round((MAX_SPEED * (movePattern[i%movePattern.length].y - pos.y)) / laenge);
         }
     }
-
-
+/*
+    public Point[] visible() {
+        Point a =map[1].map[0];
+    }
+*/
 }

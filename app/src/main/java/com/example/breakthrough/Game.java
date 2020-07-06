@@ -29,7 +29,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
     private final Joystick joystick;
     private GameLoop gameLoop;
-    private Point [] movePattern;
     private Guard[] guards;
     private Obstacles[] obstacles;
     private Target target;
@@ -60,7 +59,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         guards = new Guard[data[3].length];
         for(int i=0; i < data[3].length;i++){
-            guards[i] =new Guard(getContext(),0,25 ,data[3][i]);
+            guards[i] =new Guard(getContext(),0,25 ,data[3][i],obstacles);
         }
 
 
