@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.io.InputStream;
+
 public class MainActivity extends AppCompatActivity {
 
     private Game game;
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
-        game = new Game(this);
+        game = new Game(this, 0);
                 setContentView(game);
     }
 
