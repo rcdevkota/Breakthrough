@@ -15,7 +15,9 @@ public class Target  extends GameObject{
         boolean colidirt = false;
         for(int i = 0; i < map.length; i++) {
             if(zwischen(posY,new int[]{(map[(i + 1) % map.length]).y , map[i].y})){
-                colidirt |= (distancePointStraight( radius,'x',i,posX)) < 0;
+                if((distancePointStraight( radius,'x',i,posX)) < 0){
+                    return true;
+                }
             }
 
         }

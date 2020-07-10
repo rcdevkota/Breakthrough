@@ -35,6 +35,11 @@ public class Player extends Character {
         paint.setColor(color);
     }
 
+
+    public Point getPos(){
+        return pos;
+    }
+
     public void draw(Canvas canvas) {
 
         canvas.drawCircle(pos.x*canvas.getHeight()/1080, pos.y*canvas.getHeight()/1080, radius*canvas.getHeight()/1080, paint);
