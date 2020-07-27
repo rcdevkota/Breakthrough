@@ -77,51 +77,63 @@ public class Obstacles extends GameObject{
         for(int i =0; i<map.length;i++) {
 
             if(map[i].y==map[(i + 1) % map.length].y) {//horitzontal
-/*
+
                 double ankathete = map[i].y - posPlayer.y;
                 double gegenkathete  = Math.tan(richtung)*ankathete;
-                double tempY = Math.tan(richtung);
 
-                if( tempY * gegenkathete < 0  || ankathete < 0 ) {
+                double tempX = Math.tan(richtung);
+
+                if(tempX*gegenkathete<0  || ankathete<0 ) {
                     if(zwischen(gegenkathete + posPlayer.x,new int [] {map[i].x,map[(i + 1) % map.length].x})) {
                         double distanceTemp = pythagoras(ankathete,gegenkathete);
                         if (distanceTemp < distance) {
                             distance=distanceTemp;
-                            tmpPoint.x =(int)Math.round(ankathete);
-                            tmpPoint.y =(int)Math.round(gegenkathete);
+                            tmpPoint.y =(int)Math.round(ankathete);
+                            tmpPoint.x =(int)Math.round(gegenkathete);
                         }
                     }
                 }
-                */
+
 
             } else {
 
-                double ankathete = map[i].x - posPlayer.x;
-                double gegenkathete  = Math.tan(richtung+Math.PI/2)*ankathete;
+                double ankathete  = map[i].x - posPlayer.x;
+                double gegenkathete  = Math.tan(richtung)*ankathete;
 
-                double tempX = Math.tan(richtung+Math.PI/2);
+                double tempY = Math.tan(richtung);
 
-                if(tempX*gegenkathete<0  || ankathete<0 ){
-                    if(zwischen(gegenkathete + posPlayer.y,new int [] {map[i].y,map[(i + 1) % map.length].y})) {
+
+
+
+
+
+                if(tempY*gegenkathete < 0 || ankathete < 0 ) {
+                    if(zwischen(gegenkathete + posPlayer.y,new int [] {map[i].y , map[(i + 1) % map.length].y})) {
                         double distanceTemp = pythagoras(ankathete,gegenkathete);
                          if (distanceTemp < distance) {
                             distance=distanceTemp;
-                            tmpPoint.x =(int)Math.round(ankathete);
-                            tmpPoint.y =(int)Math.round(gegenkathete);
-
-                       }
+                            tmpPoint.x =(int)Math.round(gegenkathete);
+                            tmpPoint.y =(int)Math.round(ankathete);
+                        }
                     }
                 }
+
+
+
+
+
+
+
+
+
             }
         }
         return tmpPoint;
     }
 
-
     private double pythagoras(double a , double b){
         return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
     }
-
 
     private double distancePoints(double x1, double y1, double x2, double y2) {
 

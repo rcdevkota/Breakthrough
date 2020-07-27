@@ -35,11 +35,11 @@ public class Guard extends Character {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawCircle(pos.x *canvas.getHeight()/1080, pos.y*canvas.getHeight()/1080, radius*canvas.getHeight()/1080, paint);
-        //canvas.drawLine(1, 0x2, 1, 2, paint);
+        if(fieldOfView[0]!=null){
+            canvas.drawLine((fieldOfView[0].x+pos.x) *canvas.getHeight()/1080, (fieldOfView[0].y+pos.y) *canvas.getHeight()/1080, pos.x *canvas.getHeight()/1080, pos.y *canvas.getHeight()/1080,paint);
 
-
-       canvas.drawLine((fieldOfView[0].x+pos.x) *canvas.getHeight()/1080, (fieldOfView[0].y+pos.y) *canvas.getHeight()/1080, pos.x *canvas.getHeight()/1080, pos.y *canvas.getHeight()/1080,paint);
-    }
+        }
+           }
 
     @Override
     public void setPosition() {
@@ -70,13 +70,17 @@ public class Guard extends Character {
     private void getFieldOfView (){
         for(int i = 0; i < fieldOfView.length;i++){
             double minLegth = 10000;
-            for(int j = 0; j < map.length;j++){
-                Point tempPoints = map[j].distens(pos,-1);
+            for(int j = 0; j < map.length;j++) {
+                Point tempPoints = map[j].distens(pos,2);
                 double tempMinLegth = pythagoras(tempPoints.x,tempPoints.y);
+
+
                 if (tempMinLegth < minLegth && (tempPoints.x!=0 || tempPoints.y!=0)) {
                     fieldOfView[i] = tempPoints;
                     minLegth = tempMinLegth;
                 }
+
+
             }
         }
     }
