@@ -97,29 +97,19 @@ public class Obstacles extends GameObject{
 
             } else {
 
-                double ankathete  = map[i].x - posPlayer.x;
-                double gegenkathete  = Math.tan(richtung)*ankathete;
+                double gegenkathete= map[i].x - posPlayer.x;
+                double ankathete = gegenkathete /Math.tan(richtung);
 
-                double tempY = Math.tan(richtung);
-
-
-
-
-
-
-                if(tempY*gegenkathete < 0 || ankathete < 0 ) {
-                    if(zwischen(gegenkathete + posPlayer.y,new int [] {map[i].y , map[(i + 1) % map.length].y})) {
+                if(Math.tan(richtung)*gegenkathete<0  || ankathete<0 ) {
+                    if(zwischen(ankathete + posPlayer.y,new int [] {map[i].y,map[(i + 1) % map.length].y})) {
                         double distanceTemp = pythagoras(ankathete,gegenkathete);
-                         if (distanceTemp < distance) {
+                        if (distanceTemp < distance) {
                             distance=distanceTemp;
-                            tmpPoint.x =(int)Math.round(gegenkathete);
                             tmpPoint.y =(int)Math.round(ankathete);
+                            tmpPoint.x =(int)Math.round(gegenkathete);
                         }
                     }
                 }
-
-
-
 
 
 

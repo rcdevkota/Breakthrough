@@ -29,16 +29,18 @@ public class Guard extends Character {
         paint = new Paint();
         paint.setColor(Color.RED);
 
-        fieldOfView = new Point[1];
+        fieldOfView = new Point[11];
     }
 
     @Override
     public void draw(Canvas canvas) {
         canvas.drawCircle(pos.x *canvas.getHeight()/1080, pos.y*canvas.getHeight()/1080, radius*canvas.getHeight()/1080, paint);
-        if(fieldOfView[0]!=null){
-            canvas.drawLine((fieldOfView[0].x+pos.x) *canvas.getHeight()/1080, (fieldOfView[0].y+pos.y) *canvas.getHeight()/1080, pos.x *canvas.getHeight()/1080, pos.y *canvas.getHeight()/1080,paint);
-
+        for(int i = 0; i < fieldOfView.length;i++) {
+            if(fieldOfView[i]!=null){
+                canvas.drawLine((fieldOfView[i].x+pos.x) *canvas.getHeight()/1080, (fieldOfView[i].y+pos.y) *canvas.getHeight()/1080, pos.x *canvas.getHeight()/1080, pos.y *canvas.getHeight()/1080,paint);
+            }
         }
+
            }
 
     @Override
@@ -68,10 +70,15 @@ public class Guard extends Character {
     }
 
     private void getFieldOfView (){
-        for(int i = 0; i < fieldOfView.length;i++){
+        double richtung = 0;
+        double einBlik = 2.0/fieldOfView.length;
+        richtung = richtung+((-(fieldOfView.length/2))*einBlik);
+        for(int i = 0; i < fieldOfView.length; i++) {
+            richtung += i*einBlik;
             double minLegth = 10000;
+
             for(int j = 0; j < map.length;j++) {
-                Point tempPoints = map[j].distens(pos,2);
+                Point tempPoints = map[j].distens(pos,(float)richtung);
                 double tempMinLegth = pythagoras(tempPoints.x,tempPoints.y);
 
 
