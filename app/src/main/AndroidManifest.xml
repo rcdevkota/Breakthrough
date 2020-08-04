@@ -9,14 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity"></activity>
         <activity
-            android:name=".FullscreenActivityMain"
+            android:name=".startMenuActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fullscreen_main"
-            android:theme="@style/FullscreenTheme" />
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="landscape">
+            android:label="@string/title_activity_start_menu"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,4 +24,4 @@
         </activity>
     </application>
 
-    </manifest>
+</manifest>
