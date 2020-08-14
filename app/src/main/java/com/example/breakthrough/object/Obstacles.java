@@ -74,17 +74,17 @@ public class Obstacles extends GameObject{
 
         Point tmpPoint = new Point(0,0);
         double distance = 100000;
-        for(int i =0; i<map.length;i++) {
+        for(int i =0; i<map.length;i  ++) {
 
-            if(map[i].y==map[(i + 1) % map.length].y) {//horitzontal
-
+            if(map[i].y==map[(i + 1) % map.length].y) {
+                //horitzontal
                 double ankathete = map[i].y - posPlayer.y;
                 double gegenkathete  = Math.tan(richtung)*ankathete;
-
                 double tempX = Math.tan(richtung);
 
-                if(tempX*gegenkathete<0  || ankathete<0 ) {
-                    if(zwischen(gegenkathete + posPlayer.x,new int [] {map[i].x,map[(i + 1) % map.length].x})) {
+                int orientirung = (int)(Math.round(richtung/0.7853981633974483/2)%4);
+                if((orientirung==0 && ankathete>0)||(orientirung==2 && ankathete<0)||(orientirung==1 && gegenkathete>0)||(orientirung==3 && gegenkathete<0) ) {
+                    if(zwischen(gegenkathete + posPlayer.x , new int [] {map[i].x , map[(i + 1) % map.length].x})) {
                         double distanceTemp = pythagoras(ankathete,gegenkathete);
                         if (distanceTemp < distance) {
                             distance=distanceTemp;
@@ -93,15 +93,13 @@ public class Obstacles extends GameObject{
                         }
                     }
                 }
-
-
             } else {
-
                 double gegenkathete= map[i].x - posPlayer.x;
                 double ankathete = gegenkathete /Math.tan(richtung);
+                int orientirung = (int)(Math.round(richtung/0.7853981633974483/2)%4);
+                if((orientirung==0 && ankathete>0)||(orientirung==2 && ankathete<0)||(orientirung==1 && gegenkathete>0)||(orientirung==3 && gegenkathete<0)) {
+                    if(zwischen(ankathete + posPlayer.y , new int [] {map[i].y,map[(i + 1) % map.length].y})) {
 
-                if(Math.tan(richtung)*gegenkathete<0  || ankathete<0 ) {
-                    if(zwischen(ankathete + posPlayer.y,new int [] {map[i].y,map[(i + 1) % map.length].y})) {
                         double distanceTemp = pythagoras(ankathete,gegenkathete);
                         if (distanceTemp < distance) {
                             distance=distanceTemp;
@@ -110,16 +108,12 @@ public class Obstacles extends GameObject{
                         }
                     }
                 }
-
-
-
-
-
-
             }
         }
         return tmpPoint;
     }
+
+
 
     private double pythagoras(double a , double b){
         return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));

@@ -20,7 +20,7 @@ public class Guard extends Character {
     private Obstacles map[];
     private Point[] fieldOfView;
 
-    public Guard(Context context, float orientation,float radius, Point[] movePattern, Obstacles[] map) {
+    public Guard(Context context,  float orientation,float radius, Point[] movePattern, Obstacles[] map) {
         super(movePattern[0]);
         this.map = map;
         this.orientation = orientation;
@@ -29,7 +29,7 @@ public class Guard extends Character {
         paint = new Paint();
         paint.setColor(Color.RED);
 
-        fieldOfView = new Point[11];
+        fieldOfView = new Point[201];
     }
 
     @Override
@@ -40,8 +40,7 @@ public class Guard extends Character {
                 canvas.drawLine((fieldOfView[i].x+pos.x) *canvas.getHeight()/1080, (fieldOfView[i].y+pos.y) *canvas.getHeight()/1080, pos.x *canvas.getHeight()/1080, pos.y *canvas.getHeight()/1080,paint);
             }
         }
-
-           }
+    }
 
     @Override
     public void setPosition() {
@@ -70,25 +69,25 @@ public class Guard extends Character {
     }
 
     private void getFieldOfView (){
-        double richtung = 0;
-        double einBlik = 2.0/fieldOfView.length;
-        richtung = richtung+((-(fieldOfView.length/2))*einBlik);
-        for(int i = 0; i < fieldOfView.length; i++) {
-            richtung += i*einBlik;
-            double minLegth = 10000;
+        double richtung = 6.283185307179586 /2;
 
+        richtung = richtung-0.01*fieldOfView.length/2;
+
+      //  richtung-=2;
+      //  richtung/=2;
+
+        for(int i = 0; i < fieldOfView.length; i++) {
+
+            double minLegth = 10000;
             for(int j = 0; j < map.length;j++) {
                 Point tempPoints = map[j].distens(pos,(float)richtung);
                 double tempMinLegth = pythagoras(tempPoints.x,tempPoints.y);
-
-
                 if (tempMinLegth < minLegth && (tempPoints.x!=0 || tempPoints.y!=0)) {
                     fieldOfView[i] = tempPoints;
                     minLegth = tempMinLegth;
                 }
-
-
             }
+            richtung += 0.01;
         }
     }
 
