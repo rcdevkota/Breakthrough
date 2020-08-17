@@ -47,6 +47,7 @@ public class Guard extends Character {
 
     }
 
+
     public void update() {
 
         double laenge =  Math.sqrt(Math.pow(movePattern[i%movePattern.length].x - pos.x, 2) + Math.pow(movePattern[i%movePattern.length].y - pos.y, 2));
@@ -69,7 +70,7 @@ public class Guard extends Character {
     }
 
     private void getFieldOfView (){
-        double richtung = 6.283185307179586 /2;
+        double richtung = 6.283185307179586;
 
         richtung = richtung-0.01*fieldOfView.length/2;
 

@@ -5,8 +5,8 @@ import android.graphics.Point;
 
 public abstract class Character {
 
+    protected  double ratOrientirung;
     protected Point pos;
-
     protected double velocityX;
     protected double velocityY;
 
