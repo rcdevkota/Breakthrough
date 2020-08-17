@@ -79,13 +79,13 @@ public class Player extends Character {
             }else if(velocityX<0) {
                 wikel+=8*45;
             }
-                if( (velocityX<0)) {
-                    wikel+=180;
-                }
+            if( (velocityX<0)) {
+                wikel+=180;
+            }
 
-                if( (velocityY<0)) {
-                    wikel+=180;
-                }
+            if( (velocityY<0)) {
+                wikel+=180;
+            }
 
 
             ratOrientirung = Math.toRadians(wikel);

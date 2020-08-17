@@ -1,7 +1,10 @@
 package com.example.breakthrough;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
@@ -34,6 +37,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private Target target;
 
 
+    private Boolean erster = true;
+    private Bitmap hintergund;
+
+
     public Game(Context context , int level) {
         super(context);
 
@@ -58,13 +65,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         //Guard configurantin
 
         guards = new Guard[data[3].length];
-        for(int i=0; i < data[3].length;i++){
+        for(int i=0; i < data[3].length;i++) {
             guards[i] =new Guard(getContext(),0,25 ,data[3][i],obstacles);
         }
-
-
-
-
         setFocusable(true);
     }
 
@@ -166,22 +169,43 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+
+        super.onDraw(canvas);
+
+
+
+    }
+
     @Override
     public void draw(Canvas canvas) {
+
         super.draw(canvas);
+
+
+
+         if(erster) {
+            Bitmap b = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.hentergun);
+            hintergund = Bitmap.createScaledBitmap(b, (int) (canvas.getWidth()), (int) (canvas.getHeight()), true);
+        }
+        Paint paint = new Paint();
+        int color = ContextCompat.getColor(getContext(), R.color.player);
+        paint.setColor(color);
+        canvas.drawBitmap(hintergund, 0, 0, paint);
+        erster = false;
+
+        target.draw(canvas);
         drowUPS(canvas);
         drowFPS(canvas);
         joystick.drow(canvas);
         player.draw(canvas);
-        for(int i = 0; i <guards.length; i++){
+
+        for(int i = 0; i <guards.length; i++) {
             guards[i].draw(canvas);
         }
 
-        for(int i = 0; i <obstacles.length; i++){
-            obstacles[i].draw(canvas);
-        }
-
-        target.draw(canvas);
 
     }
 
