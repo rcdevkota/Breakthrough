@@ -7,34 +7,60 @@
     tools:context=".levelSelectionActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/lvl1Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginBottom="203dp"
         android:text="level 1"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="160dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/lvl2Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginBottom="203dp"
         android:text="level 2"
-        tools:layout_editor_absoluteX="246dp"
-        tools:layout_editor_absoluteY="160dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/lvl3Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginBottom="203dp"
         android:text="level 3"
-        tools:layout_editor_absoluteX="373dp"
-        tools:layout_editor_absoluteY="156dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/lvl4Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="level 4"
-        tools:layout_editor_absoluteX="501dp"
-        tools:layout_editor_absoluteY="160dp" />
+        android:layout_marginStart="404dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginBottom="203dp"
+        android:text="@string/lvl4Btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

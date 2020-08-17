@@ -6,4 +6,5 @@
     <string name="title_activity_game_start">FullscreenActivity</string>
     <string name="title_activity_welcome">FullscreenActivity</string>
     <string name="title_activity_start_menu">FullscreenActivity</string>
+    <string name="lvl4Btn">level 4</string>
 </resources>
