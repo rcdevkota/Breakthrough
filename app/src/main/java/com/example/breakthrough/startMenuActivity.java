@@ -16,6 +16,8 @@ public class startMenuActivity extends AppCompatActivity {
 
         configureNextButton();
     }
+
+
     private void configureNextButton(){
         Button playButton =(Button) findViewById(R.id.playButton);
         playButton.setOnClickListener(new View.OnClickListener() {
