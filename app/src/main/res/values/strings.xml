@@ -7,4 +7,9 @@
     <string name="title_activity_welcome">FullscreenActivity</string>
     <string name="title_activity_start_menu">FullscreenActivity</string>
     <string name="lvl4Btn">level 4</string>
+    <string name="play">Play</string>
+    <string name="store">Store</string>
+    <string name="settings">settings</string>
+    <string name="exit">Exit</string>
+    <string name="todo">TODO</string>
 </resources>
