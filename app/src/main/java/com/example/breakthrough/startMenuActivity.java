@@ -21,7 +21,7 @@ public class startMenuActivity extends AppCompatActivity {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(startMenuActivity.this, MainActivity.class));
+                startActivity(new Intent(startMenuActivity.this, levelSelectionActivity.class));
             }
 
         });
