@@ -10,6 +10,7 @@
         android:label=""
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme"
         android:screenOrientation="landscape">
         <activity android:name=".levelSelectionActivity"
@@ -26,6 +27,7 @@
             android:label="@string/title_activity_start_menu"
             android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

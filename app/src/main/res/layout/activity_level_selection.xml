@@ -71,8 +71,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/bac"
-        tools:layout_editor_absoluteY="0dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="-16dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
