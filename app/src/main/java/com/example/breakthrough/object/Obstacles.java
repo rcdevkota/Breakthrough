@@ -55,7 +55,6 @@ public class Obstacles extends GameObject{
 
 
             if(distancePoints(map[i].x,map[i].y,posX+ moveX,posY+ moveY)<radius) {
-                //double laenge =  Math.sqrt(Math.pow(map[i].x - (posX+ moveX), 2) + Math.pow(map[i].y - (posY+ moveY), 2));
                 collision[0] =0;
                 collision[1] =0;
             }
@@ -80,7 +79,7 @@ public class Obstacles extends GameObject{
                 //horitzontal
                 double ankathete = map[i].y - posPlayer.y;
                 double gegenkathete  = Math.tan(richtung)*ankathete;
-                double tempX = Math.tan(richtung);
+
 
                 int orientirung = (int)(Math.round(richtung/0.7853981633974483/2)%4);
                 if((orientirung==0 && ankathete>0)||(orientirung==2 && ankathete<0)||(orientirung==1 && gegenkathete>0)||(orientirung==3 && gegenkathete<0) ) {

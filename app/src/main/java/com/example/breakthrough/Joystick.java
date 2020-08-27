@@ -55,9 +55,11 @@ public class Joystick {
     }
 
     public void drow(Canvas canvas) {
+
+        int scal=canvas.getHeight()/1080;
         canvasHeight =canvas.getHeight();
-        canvas.drawCircle(outerCircleCenterPos.x*canvas.getHeight()/1080,outerCircleCenterPos.y*canvas.getHeight()/1080,outerCircleRadius*canvas.getHeight()/1080,outerCirclePaint);
-        canvas.drawCircle(innerCircleCenterPos.x*canvas.getHeight()/1080,innerCircleCenterPos.y*canvas.getHeight()/1080,innerCircleRadius*canvas.getHeight()/1080,innerCirclePaint);
+        canvas.drawCircle(outerCircleCenterPos.x*scal,outerCircleCenterPos.y*scal,outerCircleRadius*scal,outerCirclePaint);
+        canvas.drawCircle(innerCircleCenterPos.x*scal,innerCircleCenterPos.y*scal,innerCircleRadius*scal,innerCirclePaint);
     }
 
     public boolean isPressed(float touchPosX, float touchPosY) {

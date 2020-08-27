@@ -43,18 +43,18 @@ public class Player extends Character {
     }
 
     public void draw(Canvas canvas) {
-
+        int scal=canvas.getHeight()/1080;
 
         Bitmap b= BitmapFactory.decodeResource(context.getResources(), R.drawable.player);
 
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(b, (int)(radius*canvas.getHeight()/1080*2), (int)(radius*canvas.getHeight()/1080*2), true);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(b, (int)(radius*scal*2), (int)(radius*scal*2), true);
         Matrix matrix = new Matrix();
 
         matrix.postRotate((int)Math.toDegrees(ratOrientirung)+90+180);
         Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
 
-        //canvas.drawCircle(pos.x*canvas.getHeight()/1080, pos.y*canvas.getHeight()/1080, radius*canvas.getHeight()/1080, paint);
-        canvas.drawBitmap(rotatedBitmap,pos.x*canvas.getHeight()/1080-radius*canvas.getHeight()/1080,pos.y*canvas.getHeight()/1080-radius*canvas.getHeight()/1080, paint);
+        //canvas.drawCircle(pos.x*scal, pos.y*scal, radius*scal, paint);
+        canvas.drawBitmap(rotatedBitmap,pos.x*scal-radius*scal,pos.y*scal-radius*scal, paint);
     }
 
 

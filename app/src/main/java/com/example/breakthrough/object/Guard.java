@@ -6,9 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-import java.security.PublicKey;
-
-
 public class Guard extends Character {
 
     private static final double MAX_SPEED = 2;
@@ -34,10 +31,11 @@ public class Guard extends Character {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawCircle(pos.x *canvas.getHeight()/1080, pos.y*canvas.getHeight()/1080, radius*canvas.getHeight()/1080, paint);
+        int scal=canvas.getHeight()/1080;
+        canvas.drawCircle(pos.x *scal, pos.y*scal, radius*scal, paint);
         for(int i = 0; i < fieldOfView.length;i++) {
             if(fieldOfView[i]!=null){
-                canvas.drawLine((fieldOfView[i].x+pos.x) *canvas.getHeight()/1080, (fieldOfView[i].y+pos.y) *canvas.getHeight()/1080, pos.x *canvas.getHeight()/1080, pos.y *canvas.getHeight()/1080,paint);
+                canvas.drawLine((fieldOfView[i].x+pos.x) *scal, (fieldOfView[i].y+pos.y) *scal, pos.x *scal, pos.y *scal,paint);
             }
         }
     }
@@ -47,9 +45,7 @@ public class Guard extends Character {
 
     }
 
-
     public void update() {
-
         double laenge =  Math.sqrt(Math.pow(movePattern[i%movePattern.length].x - pos.x, 2) + Math.pow(movePattern[i%movePattern.length].y - pos.y, 2));
         getFieldOfView ();
         if(laenge<MAX_SPEED) {
@@ -71,14 +67,8 @@ public class Guard extends Character {
 
     private void getFieldOfView (){
         double richtung = 6.283185307179586;
-
         richtung = richtung-0.01*fieldOfView.length/2;
-
-      //  richtung-=2;
-      //  richtung/=2;
-
         for(int i = 0; i < fieldOfView.length; i++) {
-
             double minLegth = 10000;
             for(int j = 0; j < map.length;j++) {
                 Point tempPoints = map[j].distens(pos,(float)richtung);
@@ -124,5 +114,4 @@ public class Guard extends Character {
         double distance = Math.sqrt(c1*c1+c2*c2);
         return distance;
     }
-
 }
